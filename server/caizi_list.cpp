@@ -31,6 +31,13 @@ bool Info::update_users(std::string user_name, struct bufferevent *bev){
     return true;
 }
 
+bool Info::update_users(Json::Value& data, struct bufferevent *bev){
+    User user = {data["username"].asString(), bev};
+    std::unique_lock<std::mutex> lck(m_user_mutex);
+    m_users->push_back(user);
+    return true;
+}
+
 // @brief 删除用户
 void Info::delete_user(std::string user_name){
     std::unique_lock<std::mutex> lck(m_user_mutex);
@@ -41,6 +48,18 @@ void Info::delete_user(std::string user_name){
         }
     }
 }
+
+// 判断某个用户是否在线
+struct bufferevent* Info::user_is_in_m_users(const std::string& name){
+    std::unique_lock<std::mutex> lck(m_user_mutex);
+    for(auto it = m_users->begin(); it != m_users->end(); it++){
+        if(it->name == name){
+            return it->bev;
+        }
+    }
+    return nullptr;
+}
+
 
 // @brief 判断user_name是否在group_name中
 bool Info::user_is_in_group(std::string user_name, std::string group_name){

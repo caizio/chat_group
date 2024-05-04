@@ -23,20 +23,20 @@ public:
     bool read_data(Bevent* buf_evnt, char *buf);
     void write_Data(Bevent* buf_evnt, Json::Value *data);
 
-    void user_register(Bevent* buf_evnt, Json::Value *data);
-    void user_login(Bevent* buf_evnt, Json::Value *data);
-    void user_addfriend(Bevent* buf_evnt, Json::Value *data);
-    int pares_string(std::string&, std::string *);
-    void private_chat(Bevent *, Json::Value &);
-	void create_group(Bevent *, Json::Value &);
-	void join_group(Bevent *, Json::Value &);
-	void group_chat(Bevent *, Json::Value &);
-	void transfer_file(Bevent *, Json::Value &);
-	void client_offline(Bevent *, Json::Value &);
-	void get_group_member(Bevent *, Json::Value &);
+    void user_register(Bevent* buf_evnt, Json::Value &data);
+    void user_login(Bevent* buf_evnt, Json::Value &data);
+    void user_addfriend(Bevent* buf_evnt, Json::Value &data);
+    int parse_string(std::string& need_parsed_string, std::string* result);
+    void private_chat(Bevent *buf_event, Json::Value &data);
+	void create_group(Bevent *buf_event, Json::Value &data);
+	void join_group(Bevent *buf_event, Json::Value &data);
+	void group_chat(Bevent *buf_event, Json::Value &data);
+	void transfer_file(Bevent *buf_event, Json::Value &data);
+	void client_offline(Bevent *buf_event, Json::Value &data);
+	void get_group_member(Bevent *buf_event, Json::Value &data);
 
 public:
-	static void worker(Thread *);
+	static void worker(Thread* t);
 	static void timeout_cb(evutil_socket_t fd, short event, void *arg);
 	static void thread_readcb(Bevent *, void *);
 	static void thread_eventcb(Bevent *, short, void *);

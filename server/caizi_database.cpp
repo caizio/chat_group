@@ -30,6 +30,10 @@ void DataBase::database_disconnect(){
 	mysql_close(mysql);
 }
 
+void DataBase::database_close(){
+	database_disconnect();
+}
+
 bool DataBase::database_init_table(){
 	database_connect();
 	const char *g = "create table if not exists caizi_group(groupname varchar(128), groupowner varchar(128),groupmember varchar(4096))charset utf8;";
@@ -81,7 +85,7 @@ bool DataBase::database_user_is_exist(std::string u)
 {
 	char sql[256] = {0};
 
-	sprintf(sql, "select * from chat_user where username = '%s';", u.c_str());
+	sprintf(sql, "select * from user where username = '%s';", u.c_str());
 
 	std::unique_lock<std::mutex> lck(_mutex);
 
@@ -116,7 +120,7 @@ void DataBase::database_insert_user_info(Json::Value &v)
 
 	char sql[256] = {0};
 
-	sprintf(sql, "insert into chat_user (username, password) values ('%s', '%s');", username.c_str(), password.c_str());
+	sprintf(sql, "insert into user (username, password) values ('%s', '%s');", username.c_str(), password.c_str());
 
 	std::unique_lock<std::mutex> lck(_mutex);
 
@@ -132,7 +136,7 @@ bool DataBase::database_password_correct(Json::Value &v)
 	std::string password = v["password"].asString();
 
 	char sql[256] = {0};
-	sprintf(sql, "select password from chat_user where username = '%s';", username.c_str());
+	sprintf(sql, "select password from user where username = '%s';", username.c_str());
 
 	std::unique_lock<std::mutex> lck(_mutex);
 
@@ -166,40 +170,35 @@ bool DataBase::database_password_correct(Json::Value &v)
 	}
 }
 
-bool DataBase::database_get_friend_group(Json::Value &v, 
-		    		std::string &friList, std::string &groList)
-{
+// @brief 查询v["username"]的朋友和群组
+// @param[out] friList 查询的朋友列表
+// @param[out] groList 查询的群组列表
+bool DataBase::database_get_friend_group(Json::Value &v, std::string &friList, std::string &groList){
 	char sql[1024] = {0};
-	sprintf(sql, "select * from chat_user where username = '%s';", 
-					v["username"].asString().c_str());
+	sprintf(sql, "select * from user where username = '%s';", v["username"].asString().c_str());
 
 	std::unique_lock<std::mutex> lck(_mutex);
 
-	if (mysql_query(mysql, sql) != 0)
-	{
+	if (mysql_query(mysql, sql) != 0){
 		std::cout << "select * error" << std::endl;
 		return false;
 	}
 
 	MYSQL_RES *res = mysql_store_result(mysql);
-	if (NULL == res)
-	{
+	if (NULL == res){
 		std::cout << "store result error" << std::endl;
 		return false;
 	}
 
 	MYSQL_ROW row = mysql_fetch_row(res);
-	if (NULL == row)
-	{
+	if (NULL == row){
 		return false;
 	}
 
-	if (row[2])
-	{
+	if (row[2]){
 		friList = std::string(row[2]);
 	}
-	if (row[3])
-	{
+	if (row[3]){
 		groList = std::string(row[3]);
 	}
 
@@ -219,7 +218,7 @@ void DataBase::database_update_friendlist(std::string &u, std::string &f)
 {
 	char sql[256] = {0};
 	std::string friendlist;
-	sprintf(sql, "select friendlist from chat_user where username = '%s';", u.c_str());
+	sprintf(sql, "select friendlist from user where username = '%s';", u.c_str());
 
 	std::unique_lock<std::mutex> lck(_mutex);
 
@@ -250,56 +249,51 @@ void DataBase::database_update_friendlist(std::string &u, std::string &f)
 
 	memset(sql, 0, sizeof(sql));
 
-	sprintf(sql, "update chat_user set friendlist = '%s' where username = '%s';", friendlist.c_str(), u.c_str());
+	sprintf(sql, "update user set friendlist = '%s' where username = '%s';", friendlist.c_str(), u.c_str());
 
 	if (mysql_query(mysql, sql) != 0)
 	{
-		std::cout << "update chat_user error" << std::endl;
+		std::cout << "update user error" << std::endl;
 	}
 }
 
+// 添加一个新的群组
 void DataBase::database_add_new_group(std::string g, std::string owner)
 {
 	char sql[256] = {0};
 	std::string grouplist;
 
-	//修改chat_group表
-	sprintf(sql, "insert into chat_group values ('%s', '%s', '%s');", 
+	//修改caizi_group表
+	sprintf(sql, "insert into caizi_group values ('%s', '%s', '%s');", 
 			g.c_str(), owner.c_str(), owner.c_str());
 
 	std::unique_lock<std::mutex> lck(_mutex);
 
-	if (mysql_query(mysql, sql) != 0)
-	{
+	if (mysql_query(mysql, sql) != 0){
 		std::cout << "insert error" << std::endl;
 		return;
 	}
 
-	//修改chat_user表
+	//修改user表
 	memset(sql, 0, sizeof(sql));
-	sprintf(sql, "select grouplist from chat_user where username = '%s';",
-			owner.c_str());
+	sprintf(sql, "select grouplist from user where username = '%s';", owner.c_str());
 
-	if (mysql_query(mysql, sql) != 0)
-	{
+	if (mysql_query(mysql, sql) != 0){
 		std::cout << "select friendlist error" << std::endl;
 		return;
 	}
 
 	MYSQL_RES *res = mysql_store_result(mysql);
-	if (NULL == res)
-	{
+	if (NULL == res){
 		std::cout << "store result error" << std::endl;
 		return;
 	}
 
 	MYSQL_ROW row = mysql_fetch_row(res);
-	if (NULL == row[0])
-	{
+	if (NULL == row[0]){
 		grouplist.append(g);
 	}
-	else 
-	{
+	else{
 		grouplist.append(row[0]);
 		grouplist.append("|");
 		grouplist.append(g);
@@ -307,21 +301,20 @@ void DataBase::database_add_new_group(std::string g, std::string owner)
 
 	memset(sql, 0, sizeof(sql));
 
-	sprintf(sql, "update chat_user set grouplist = '%s' where username = '%s';", grouplist.c_str(), owner.c_str());
+	sprintf(sql, "update user set grouplist = '%s' where username = '%s';", grouplist.c_str(), owner.c_str());
 
-	if (mysql_query(mysql, sql) != 0)
-	{
-		std::cout << "update chat_user error" << std::endl;
+	if (mysql_query(mysql, sql) != 0){
+		std::cout << "update user error" << std::endl;
 	}
 }
 
 void DataBase::database_update_group_member(std::string g, std::string u)
 {
-	//先修改chat_group内容
-	database_update_info("chat_group", g, u);
+	//先修改caizi_group内容
+	database_update_info("caizi_group", g, u);
 
-	//再修改chat_user内容
-	database_update_info("chat_user", g, u);
+	//再修改user内容
+	database_update_info("user", g, u);
 
 }
 
@@ -332,13 +325,13 @@ void DataBase::database_update_info(std::string table,
 	char sql[256] = {0};
 	std::string member;
 
-	if (table == "chat_group")
+	if (table == "caizi_group")
 	{
-		sprintf(sql, "select groupmember from chat_group where groupname = '%s';", groupname.c_str());
+		sprintf(sql, "select groupmember from caizi_group where groupname = '%s';", groupname.c_str());
 	}
-	else if (table == "chat_user")
+	else if (table == "user")
 	{
-		sprintf(sql, "select grouplist from chat_user where username = '%s';", username.c_str());
+		sprintf(sql, "select grouplist from user where username = '%s';", username.c_str());
 	}
 
 	std::unique_lock<std::mutex> lck(_mutex);
@@ -359,24 +352,24 @@ void DataBase::database_update_info(std::string table,
 	MYSQL_ROW row = mysql_fetch_row(res);
 	if (row[0] == NULL)
 	{
-		if (table == "chat_group")
+		if (table == "caizi_group")
 		{
 			member.append(username);
 		}
-		else if (table == "chat_user")
+		else if (table == "user")
 		{
 			member.append(groupname);
 		}
 	}
 	else
 	{
-		if (table == "chat_group")
+		if (table == "caizi_group")
 		{
 			member.append(row[0]);
 			member.append("|");
 			member.append(username);
 		}
-		else if (table == "chat_user")
+		else if (table == "user")
 		{
 			member.append(row[0]);
 			member.append("|");
@@ -389,18 +382,18 @@ void DataBase::database_update_info(std::string table,
 	//修改后再更新
 	memset(sql, 0, sizeof(sql));
 
-	if (table == "chat_group")
+	if (table == "caizi_group")
 	{
-		sprintf(sql, "update chat_group set groupmember = '%s' where groupname = '%s';", member.c_str(), groupname.c_str());
+		sprintf(sql, "update caizi_group set groupmember = '%s' where groupname = '%s';", member.c_str(), groupname.c_str());
 	}
-	else if (table == "chat_user")
+	else if (table == "user")
 	{
-		sprintf(sql, "update chat_user set grouplist = '%s' where username = '%s';", member.c_str(), username.c_str());
+		sprintf(sql, "update user set grouplist = '%s' where username = '%s';", member.c_str(), username.c_str());
 	}
 
 	if (mysql_query(mysql, sql) != 0)
 	{
-		std::cout << "update chat_group error" << std::endl;
+		std::cout << "update caizi_group error" << std::endl;
 	}
 }
 

@@ -19,6 +19,7 @@ public:
 	~DataBase();
 	bool database_connect();
 	void database_disconnect();
+	void database_close();
 	bool database_init_table();
 	bool database_user_is_exist(std::string);
 	void database_insert_user_info(Json::Value &);

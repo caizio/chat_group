@@ -7,6 +7,7 @@
 #include <map>
 #include <mutex>
 #include <event.h>
+#include <jsoncpp/json/json.h>
 
 namespace caizi{
 
@@ -23,8 +24,10 @@ public:
 
     struct bufferevent* get_user_buffevent(std::string user_name);
     bool update_users(std::string user_name, struct bufferevent *bev);
+    bool update_users(Json::Value& data, struct bufferevent *bev);
     void delete_user(std::string user_name);
     bool user_is_in_group(std::string user_name,std::string group_name);
+    struct bufferevent* user_is_in_m_users(const std::string& name);
 
     bool group_is_exist(std::string);
     void get_group_member(std::string group_name, std::string &result);
