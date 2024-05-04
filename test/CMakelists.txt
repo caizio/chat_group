@@ -1,0 +1,5 @@
+file(GLOB CPP_src *.cpp)
+
+foreach(v ${CPP_src})
+    add_executable(${target_name} ${v})
+endforeach()
