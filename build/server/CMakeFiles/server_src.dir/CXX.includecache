@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/caizi/C++/libevent_my/server/caizi_database.cpp
-caizi_database.h
-/home/caizi/C++/libevent_my/server/caizi_database.h
-
 /home/caizi/C++/libevent_my/server/caizi_database.h
 mysql/mysql.h
 -
@@ -23,10 +19,6 @@ jsoncpp/json/json.h
 -
 cstring
 -
-
-/home/caizi/C++/libevent_my/server/caizi_list.cpp
-caizi_list.h
-/home/caizi/C++/libevent_my/server/caizi_list.h
 
 /home/caizi/C++/libevent_my/server/caizi_list.h
 iostream
@@ -45,6 +37,8 @@ event.h
 /home/caizi/C++/libevent_my/server/caizi_thread.cpp
 caizi_thread.h
 /home/caizi/C++/libevent_my/server/caizi_thread.h
+cstring
+-
 
 /home/caizi/C++/libevent_my/server/caizi_thread.h
 thread
@@ -55,6 +49,4 @@ caizi_list.h
 /home/caizi/C++/libevent_my/server/caizi_list.h
 caizi_database.h
 /home/caizi/C++/libevent_my/server/caizi_database.h
-
-/home/caizi/C++/libevent_my/server/server.cpp
 
