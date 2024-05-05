@@ -49,7 +49,7 @@ void Info::delete_user(std::string user_name){
     }
 }
 
-// 判断某个用户是否在线
+// 判断某个用户是否在线，返回某个用户的Bevent
 struct bufferevent* Info::user_is_in_m_users(const std::string& name){
     std::unique_lock<std::mutex> lck(m_user_mutex);
     for(auto it = m_users->begin(); it != m_users->end(); it++){

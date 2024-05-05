@@ -25,11 +25,11 @@ public:
 	void database_insert_user_info(Json::Value &);
 	int database_get_group_info(std::string *);
 	bool database_password_correct(Json::Value &);
-	bool database_get_friend_group(Json::Value &, std::string &, std::string &);
+	bool database_get_user_friend_and_group(Json::Value &v, std::string &friList, std::string &groList);
 	void database_add_friend(Json::Value &);
 	void database_update_friendlist(std::string &, std::string &);
 	void database_add_new_group(std::string, std::string);
-	void database_update_group_member(std::string, std::string);
+	void database_update_group_member(std::string group, std::string user);
 	void database_update_info(std::string, std::string, std::string);
 };
 

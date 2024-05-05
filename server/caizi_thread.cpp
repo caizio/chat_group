@@ -114,7 +114,7 @@ void Thread::user_login(Bevent* buf_evnt, Json::Value& data){
 
     // 用户存在，密码正确
     std::string friendlist, grouplist;
-    if(!m_db->database_get_friend_group(data, friendlist, grouplist)){
+    if(!m_db->database_get_user_friend_and_group(data, friendlist, grouplist)){
         std::cout << "error: database_get_friend_group" << std::endl;
         m_db->database_disconnect();
         return;
@@ -179,7 +179,7 @@ void Thread::user_addfriend(Bevent* buf_evnt, Json::Value& data){
 
     // 已经是好友，则不用添加并返回
     std::string friendlist, grouplist;
-    if(!m_db->database_get_friend_group(data, friendlist, grouplist)){
+    if(!m_db->database_get_user_friend_and_group(data, friendlist, grouplist)){
         std::string str[1024];
         int count = parse_string(friendlist, str);
         for(int i = 0; i < count; i++){
@@ -278,12 +278,123 @@ void Thread::create_group(Bevent *buf_event, Json::Value &data){
 
 // 加入群聊
 void Thread::join_group(Bevent* buf_event, Json::Value& data){
-    
+    std::string group_name = data["groupname"].asString();
+    std::string user_name = data["username"].asString();
+    if(!m_info->group_is_exist(group_name)){
+        Json::Value val;
+        val["cmd"] = "join_group_reply";
+        val["result"] = "group_not_exist";
+        write_Data(buf_event, &val);
+        return;
+    }
+
+    if(m_info->user_is_in_group(user_name, group_name)){
+        Json::Value val;
+        val["cmd"] = "join_group_reply";
+        val["result"] = "already_in_group";
+        write_Data(buf_event, &val);
+        return;
+    }
+
+    m_db->database_connect();
+    m_db->database_update_group_member(group_name, user_name);
+    m_db->database_disconnect();
+
+    m_info->update_groups_member(group_name, user_name);
+
+    Bevent* temp_bevent;
+    std::string members;
+    std::list<std::string> users = m_info->get_group_members(group_name);
+
+    for(std::list<std::string>::iterator it = users.begin(); it!= users.end(); it++){
+        if(*it == user_name) continue;
+
+        members += *it;
+        members += "|";
+
+        temp_bevent = m_info->user_is_in_m_users(*it);
+        if(NULL != temp_bevent){
+            Json::Value val;
+            val["cmd"] = "new_member_join";
+            val["username"] = user_name;
+            val["groupname"] = group_name;
+            write_Data(temp_bevent, &val);
+        }
+    }
+
+    members.erase(members.size() - 1);
+
+    Json::Value val;
+    val["cmd"] = "joingroup_reply";
+    val["username"] = user_name;
+    val["members"] = members;
+    write_Data(buf_event, &val);
 }
-void Thread::group_chat(Bevent* buf_event, Json::Value& data){}
+
+// 给群组所有成员发送消息
+void Thread::group_chat(Bevent* buf_event, Json::Value& data){
+    std::string group_name = data["groupname"].asString();
+    std::list<std::string> users = m_info->get_group_members(group_name);
+
+    Bevent* send_message;
+    for(auto it = users.begin(); it != users.end(); it++){
+        if(*it == data["username"].asString()) return;
+
+        Bevent* temp_event = m_info->user_is_in_m_users(*it);
+        if(NULL == temp_event) continue;
+
+        Json::Value val;
+        val["cmd"] = "groupchat_reply";
+        val["from"] = data["username"];
+        val["groupname"] = group_name;
+        val["text"] = data["text"];
+
+        write_Data(temp_event, &val);
+    }
+}
+
+// 发送文件
 void Thread::transfer_file(Bevent* buf_event, Json::Value& data){}
-void Thread::client_offline(Bevent* buf_event, Json::Value& data){}
-void Thread::get_group_member(Bevent* buf_event, Json::Value& data){}
+
+// 用户下线
+void Thread::client_offline(Bevent* buf_event, Json::Value& data){
+    std::string user_name = data["user_name"].asString();
+    m_info->delete_user(user_name);
+    bufferevent_free(buf_event);
+
+	std::string friends, group;
+    m_db->database_connect();
+    m_db->database_get_user_friend_and_group(data, friends, group);
+    m_db->database_disconnect();
+    
+    std::string str[1024];
+    int num = parse_string(friends, str);
+
+    for(int i = 0; i < num; i++){
+        Json::Value val;
+        val["cmd"] = "firend_offline";
+        val["username"] = user_name;
+
+        Bevent* b = m_info->user_is_in_m_users(str[i]);
+        if(NULL != b){
+            write_Data(b, &val);
+        }
+    }
+
+    std::cout << user_name << ":client offline" << std::endl;
+}
+
+// 获取群组成员
+void Thread::get_group_member(Bevent* buf_event, Json::Value& data){
+    std::string group_name = data["groupname"].asString();
+    std::string members;
+    m_info->get_group_member(group_name, members);
+
+    Json::Value val;
+    val["cmd"] = "groupmember_reply";
+    val["member"] = members;
+    write_Data(buf_event, &val);
+}
 
 void Thread::worker(Thread* t){
     t->run();

@@ -173,7 +173,7 @@ bool DataBase::database_password_correct(Json::Value &v)
 // @brief 查询v["username"]的朋友和群组
 // @param[out] friList 查询的朋友列表
 // @param[out] groList 查询的群组列表
-bool DataBase::database_get_friend_group(Json::Value &v, std::string &friList, std::string &groList){
+bool DataBase::database_get_user_friend_and_group(Json::Value &v, std::string &friList, std::string &groList){
 	char sql[1024] = {0};
 	sprintf(sql, "select * from user where username = '%s';", v["username"].asString().c_str());
 
@@ -308,6 +308,11 @@ void DataBase::database_add_new_group(std::string g, std::string owner)
 	}
 }
 
+/*
+	@brief 更新群组成员
+	@param[in] g 群组名
+	@param[in] u 用户名
+*/ 
 void DataBase::database_update_group_member(std::string g, std::string u)
 {
 	//先修改caizi_group内容
