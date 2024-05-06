@@ -39,11 +39,11 @@ void Server::listen(const char *ip, int port){
     struct sockaddr_in addr;
     memset(&addr, 0, sizeof(struct sockaddr_in));
     addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = inet_addr(ip);
+    addr.sin_addr.s_addr = INADDR_ANY;
     addr.sin_port = htons(port);
 
     struct evconnlistener* listener = evconnlistener_new_bind(m_base, listen_cb, 
-        this, LEV_OPT_CLOSE_ON_FREE | LEV_OPT_REUSEABLE, 5, (struct sockaddr*)&addr, sizeof(struct sockaddr_in));
+        this, LEV_OPT_CLOSE_ON_FREE | LEV_OPT_REUSEABLE, 5, (struct sockaddr*)&addr, sizeof(addr));
 
     if(NULL == listener){
         std::cout << "evconnlistener_new_bind error" << std::endl;
@@ -61,7 +61,6 @@ void Server::listen_cb(struct evconnlistener *listerner, evutil_socket_t fd, str
     Server* server = (Server*)arg;
     struct sockaddr_in *client_addr = (struct sockaddr_in*)addr;
     server->server_alloc_event(fd);
-
 }
 
 // 服务器接收一个新的连接
