@@ -6,8 +6,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/caizi/C++/libevent_my/server/caizi_database.cpp" "/home/caizi/C++/libevent_my/build/server/CMakeFiles/server_src.dir/caizi_database.cpp.o"
   "/home/caizi/C++/libevent_my/server/caizi_list.cpp" "/home/caizi/C++/libevent_my/build/server/CMakeFiles/server_src.dir/caizi_list.cpp.o"
+  "/home/caizi/C++/libevent_my/server/caizi_server.cpp" "/home/caizi/C++/libevent_my/build/server/CMakeFiles/server_src.dir/caizi_server.cpp.o"
   "/home/caizi/C++/libevent_my/server/caizi_thread.cpp" "/home/caizi/C++/libevent_my/build/server/CMakeFiles/server_src.dir/caizi_thread.cpp.o"
-  "/home/caizi/C++/libevent_my/server/server.cpp" "/home/caizi/C++/libevent_my/build/server/CMakeFiles/server_src.dir/server.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

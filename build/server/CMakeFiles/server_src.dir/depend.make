@@ -7,10 +7,14 @@ server/CMakeFiles/server_src.dir/caizi_database.cpp.o: ../server/caizi_database.
 server/CMakeFiles/server_src.dir/caizi_list.cpp.o: ../server/caizi_list.cpp
 server/CMakeFiles/server_src.dir/caizi_list.cpp.o: ../server/caizi_list.h
 
+server/CMakeFiles/server_src.dir/caizi_server.cpp.o: ../server/caizi_database.h
+server/CMakeFiles/server_src.dir/caizi_server.cpp.o: ../server/caizi_list.h
+server/CMakeFiles/server_src.dir/caizi_server.cpp.o: ../server/caizi_server.cpp
+server/CMakeFiles/server_src.dir/caizi_server.cpp.o: ../server/caizi_server.h
+server/CMakeFiles/server_src.dir/caizi_server.cpp.o: ../server/caizi_thread.h
+
 server/CMakeFiles/server_src.dir/caizi_thread.cpp.o: ../server/caizi_database.h
 server/CMakeFiles/server_src.dir/caizi_thread.cpp.o: ../server/caizi_list.h
 server/CMakeFiles/server_src.dir/caizi_thread.cpp.o: ../server/caizi_thread.cpp
 server/CMakeFiles/server_src.dir/caizi_thread.cpp.o: ../server/caizi_thread.h
-
-server/CMakeFiles/server_src.dir/server.cpp.o: ../server/server.cpp
 

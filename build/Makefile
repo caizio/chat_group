@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named server.exe
+# Target rules for targets named server
 
 # Build rule for target.
-server.exe: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 server.exe
-.PHONY : server.exe
+server: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 server
+.PHONY : server
 
 # fast build rule for target.
-server.exe/fast:
-	$(MAKE) -f CMakeFiles/server.exe.dir/build.make CMakeFiles/server.exe.dir/build
-.PHONY : server.exe/fast
+server/fast:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+.PHONY : server/fast
 
 #=============================================================================
 # Target rules for targets named server_src
@@ -142,7 +142,7 @@ main_server.o: main_server.cpp.o
 
 # target to build an object file
 main_server.cpp.o:
-	$(MAKE) -f CMakeFiles/server.exe.dir/build.make CMakeFiles/server.exe.dir/main_server.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main_server.cpp.o
 .PHONY : main_server.cpp.o
 
 main_server.i: main_server.cpp.i
@@ -151,7 +151,7 @@ main_server.i: main_server.cpp.i
 
 # target to preprocess a source file
 main_server.cpp.i:
-	$(MAKE) -f CMakeFiles/server.exe.dir/build.make CMakeFiles/server.exe.dir/main_server.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main_server.cpp.i
 .PHONY : main_server.cpp.i
 
 main_server.s: main_server.cpp.s
@@ -160,7 +160,7 @@ main_server.s: main_server.cpp.s
 
 # target to generate assembly for a file
 main_server.cpp.s:
-	$(MAKE) -f CMakeFiles/server.exe.dir/build.make CMakeFiles/server.exe.dir/main_server.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main_server.cpp.s
 .PHONY : main_server.cpp.s
 
 # Help Target
@@ -171,7 +171,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... server.exe"
+	@echo "... server"
 	@echo "... server_src"
 	@echo "... main_server.o"
 	@echo "... main_server.i"

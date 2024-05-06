@@ -39,7 +39,7 @@ public:
 	static void worker(Thread* t);
 	static void timeout_cb(evutil_socket_t fd, short event, void *arg);
 	static void thread_readcb(Bevent *, void *);
-	static void thread_eventcb(Bevent *, short, void *);
+	static void thread_eventcb(Bevent *buf_event, short flag, void *arg);
 
 private:
     std::thread *m_thread;

@@ -1,1 +1,1 @@
-/usr/bin/g++  -g   CMakeFiles/server.dir/main_server.cpp.o  -o ../bin/server 
+/usr/bin/g++  -g   CMakeFiles/server.dir/main_server.cpp.o  -o ../bin/server  ../lib/libserver_src.a -ljsoncpp -lmysqlclient -lpthread -levent 

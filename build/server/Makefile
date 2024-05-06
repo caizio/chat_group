@@ -179,6 +179,33 @@ caizi_list.cpp.s:
 	cd /home/caizi/C++/libevent_my/build && $(MAKE) -f server/CMakeFiles/server_src.dir/build.make server/CMakeFiles/server_src.dir/caizi_list.cpp.s
 .PHONY : caizi_list.cpp.s
 
+caizi_server.o: caizi_server.cpp.o
+
+.PHONY : caizi_server.o
+
+# target to build an object file
+caizi_server.cpp.o:
+	cd /home/caizi/C++/libevent_my/build && $(MAKE) -f server/CMakeFiles/server_src.dir/build.make server/CMakeFiles/server_src.dir/caizi_server.cpp.o
+.PHONY : caizi_server.cpp.o
+
+caizi_server.i: caizi_server.cpp.i
+
+.PHONY : caizi_server.i
+
+# target to preprocess a source file
+caizi_server.cpp.i:
+	cd /home/caizi/C++/libevent_my/build && $(MAKE) -f server/CMakeFiles/server_src.dir/build.make server/CMakeFiles/server_src.dir/caizi_server.cpp.i
+.PHONY : caizi_server.cpp.i
+
+caizi_server.s: caizi_server.cpp.s
+
+.PHONY : caizi_server.s
+
+# target to generate assembly for a file
+caizi_server.cpp.s:
+	cd /home/caizi/C++/libevent_my/build && $(MAKE) -f server/CMakeFiles/server_src.dir/build.make server/CMakeFiles/server_src.dir/caizi_server.cpp.s
+.PHONY : caizi_server.cpp.s
+
 caizi_thread.o: caizi_thread.cpp.o
 
 .PHONY : caizi_thread.o
@@ -206,33 +233,6 @@ caizi_thread.cpp.s:
 	cd /home/caizi/C++/libevent_my/build && $(MAKE) -f server/CMakeFiles/server_src.dir/build.make server/CMakeFiles/server_src.dir/caizi_thread.cpp.s
 .PHONY : caizi_thread.cpp.s
 
-server.o: server.cpp.o
-
-.PHONY : server.o
-
-# target to build an object file
-server.cpp.o:
-	cd /home/caizi/C++/libevent_my/build && $(MAKE) -f server/CMakeFiles/server_src.dir/build.make server/CMakeFiles/server_src.dir/server.cpp.o
-.PHONY : server.cpp.o
-
-server.i: server.cpp.i
-
-.PHONY : server.i
-
-# target to preprocess a source file
-server.cpp.i:
-	cd /home/caizi/C++/libevent_my/build && $(MAKE) -f server/CMakeFiles/server_src.dir/build.make server/CMakeFiles/server_src.dir/server.cpp.i
-.PHONY : server.cpp.i
-
-server.s: server.cpp.s
-
-.PHONY : server.s
-
-# target to generate assembly for a file
-server.cpp.s:
-	cd /home/caizi/C++/libevent_my/build && $(MAKE) -f server/CMakeFiles/server_src.dir/build.make server/CMakeFiles/server_src.dir/server.cpp.s
-.PHONY : server.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -248,12 +248,12 @@ help:
 	@echo "... caizi_list.o"
 	@echo "... caizi_list.i"
 	@echo "... caizi_list.s"
+	@echo "... caizi_server.o"
+	@echo "... caizi_server.i"
+	@echo "... caizi_server.s"
 	@echo "... caizi_thread.o"
 	@echo "... caizi_thread.i"
 	@echo "... caizi_thread.s"
-	@echo "... server.o"
-	@echo "... server.i"
-	@echo "... server.s"
 .PHONY : help
 
 

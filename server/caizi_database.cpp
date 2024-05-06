@@ -52,10 +52,14 @@ bool DataBase::database_init_table(){
 	return true;
 }
 
+/*
+	@brief 从数据库中获取存取信息
+	@param[in] g 存储返回的群组信息
+	@param[out] int 返回群组数量
+*/
 int DataBase::database_get_group_info(std::string *g)
 {
-	if (mysql_query(mysql, "select * from caizi_group;") != 0)
-	{
+	if (mysql_query(mysql, "select * from caizi_group;") != 0){
 		std::cout << "select error" << std::endl;
 		return -1;
 	}
@@ -72,7 +76,6 @@ int DataBase::database_get_group_info(std::string *g)
 		g[idx] += r[0];
 		g[idx] += '|';
 		g[idx] += r[2];
-		//std::cout << g[idx] << std::endl;
 		idx++;
 	}
 

@@ -1,8 +1,9 @@
 #include <iostream>
-#include "server/server.h"
-
+#include "server/caizi_server.h"
 
 int main(){
-    std::cout << "hellor world" << std::endl;
+    caizi::Server server;
+    server.listen(IP, PORT);
+
     return 0;
 }

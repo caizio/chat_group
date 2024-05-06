@@ -53,7 +53,7 @@ CMAKE_BINARY_DIR = /home/caizi/C++/libevent_my/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/server.exe.dir/all
+all: CMakeFiles/server.dir/all
 all: server/all
 all: client/all
 
@@ -66,7 +66,7 @@ preinstall: client/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/server.exe.dir/clean
+clean: CMakeFiles/server.dir/clean
 clean: server/clean
 clean: client/clean
 
@@ -109,31 +109,31 @@ server/clean: server/CMakeFiles/server_src.dir/clean
 .PHONY : server/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/server.exe.dir
+# Target rules for target CMakeFiles/server.dir
 
 # All Build rule for target.
-CMakeFiles/server.exe.dir/all:
-	$(MAKE) -f CMakeFiles/server.exe.dir/build.make CMakeFiles/server.exe.dir/depend
-	$(MAKE) -f CMakeFiles/server.exe.dir/build.make CMakeFiles/server.exe.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/caizi/C++/libevent_my/build/CMakeFiles --progress-num=1,2 "Built target server.exe"
-.PHONY : CMakeFiles/server.exe.dir/all
+CMakeFiles/server.dir/all: server/CMakeFiles/server_src.dir/all
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/depend
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/caizi/C++/libevent_my/build/CMakeFiles --progress-num=1,2 "Built target server"
+.PHONY : CMakeFiles/server.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/server.exe.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/caizi/C++/libevent_my/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/server.exe.dir/all
+CMakeFiles/server.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/caizi/C++/libevent_my/build/CMakeFiles 7
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/server.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/caizi/C++/libevent_my/build/CMakeFiles 0
-.PHONY : CMakeFiles/server.exe.dir/rule
+.PHONY : CMakeFiles/server.dir/rule
 
 # Convenience name for target.
-server.exe: CMakeFiles/server.exe.dir/rule
+server: CMakeFiles/server.dir/rule
 
-.PHONY : server.exe
+.PHONY : server
 
 # clean rule for target.
-CMakeFiles/server.exe.dir/clean:
-	$(MAKE) -f CMakeFiles/server.exe.dir/build.make CMakeFiles/server.exe.dir/clean
-.PHONY : CMakeFiles/server.exe.dir/clean
+CMakeFiles/server.dir/clean:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/clean
+.PHONY : CMakeFiles/server.dir/clean
 
 #=============================================================================
 # Target rules for target server/CMakeFiles/server_src.dir

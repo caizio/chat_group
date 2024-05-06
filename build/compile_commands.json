@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/caizi/C++/libevent_my/build",
-  "command": "/usr/bin/g++   -I/home/caizi/C++/libevent_my/server -I/home/caizi/C++/libevent_my/client  -g   -O0 -g -ggdb -Wno-unused-variable -std=gnu++17 -o CMakeFiles/server.exe.dir/main_server.cpp.o -c /home/caizi/C++/libevent_my/main_server.cpp",
+  "command": "/usr/bin/g++   -I/home/caizi/C++/libevent_my/server -I/home/caizi/C++/libevent_my/client  -g   -O0 -g -ggdb -Wno-unused-variable -std=gnu++17 -o CMakeFiles/server.dir/main_server.cpp.o -c /home/caizi/C++/libevent_my/main_server.cpp",
   "file": "/home/caizi/C++/libevent_my/main_server.cpp"
 },
 {
@@ -16,12 +16,12 @@
 },
 {
   "directory": "/home/caizi/C++/libevent_my/build/server",
-  "command": "/usr/bin/g++   -I/home/caizi/C++/libevent_my/server -I/home/caizi/C++/libevent_my/client  -g   -O0 -g -ggdb -Wno-unused-variable -std=gnu++17 -o CMakeFiles/server_src.dir/caizi_thread.cpp.o -c /home/caizi/C++/libevent_my/server/caizi_thread.cpp",
-  "file": "/home/caizi/C++/libevent_my/server/caizi_thread.cpp"
+  "command": "/usr/bin/g++   -I/home/caizi/C++/libevent_my/server -I/home/caizi/C++/libevent_my/client  -g   -O0 -g -ggdb -Wno-unused-variable -std=gnu++17 -o CMakeFiles/server_src.dir/caizi_server.cpp.o -c /home/caizi/C++/libevent_my/server/caizi_server.cpp",
+  "file": "/home/caizi/C++/libevent_my/server/caizi_server.cpp"
 },
 {
   "directory": "/home/caizi/C++/libevent_my/build/server",
-  "command": "/usr/bin/g++   -I/home/caizi/C++/libevent_my/server -I/home/caizi/C++/libevent_my/client  -g   -O0 -g -ggdb -Wno-unused-variable -std=gnu++17 -o CMakeFiles/server_src.dir/server.cpp.o -c /home/caizi/C++/libevent_my/server/server.cpp",
-  "file": "/home/caizi/C++/libevent_my/server/server.cpp"
+  "command": "/usr/bin/g++   -I/home/caizi/C++/libevent_my/server -I/home/caizi/C++/libevent_my/client  -g   -O0 -g -ggdb -Wno-unused-variable -std=gnu++17 -o CMakeFiles/server_src.dir/caizi_thread.cpp.o -c /home/caizi/C++/libevent_my/server/caizi_thread.cpp",
+  "file": "/home/caizi/C++/libevent_my/server/caizi_thread.cpp"
 }
 ]

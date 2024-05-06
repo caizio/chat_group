@@ -9,8 +9,8 @@
 /home/caizi/C++/libevent_my/main_server.cpp
 iostream
 -
-server/server.h
-/home/caizi/C++/libevent_my/server/server.h
+server/caizi_server.h
+/home/caizi/C++/libevent_my/server/caizi_server.h
 
 /home/caizi/C++/libevent_my/server/caizi_database.h
 mysql/mysql.h
@@ -39,18 +39,10 @@ mutex
 -
 event.h
 -
-
-/home/caizi/C++/libevent_my/server/caizi_thread.h
-thread
+jsoncpp/json/json.h
 -
-event.h
--
-caizi_list.h
-/home/caizi/C++/libevent_my/server/caizi_list.h
-caizi_database.h
-/home/caizi/C++/libevent_my/server/caizi_database.h
 
-/home/caizi/C++/libevent_my/server/server.h
+/home/caizi/C++/libevent_my/server/caizi_server.h
 iostream
 -
 event.h
@@ -73,4 +65,14 @@ caizi_list.h
 /home/caizi/C++/libevent_my/server/caizi_list.h
 caizi_thread.h
 /home/caizi/C++/libevent_my/server/caizi_thread.h
+
+/home/caizi/C++/libevent_my/server/caizi_thread.h
+thread
+-
+event.h
+-
+caizi_list.h
+/home/caizi/C++/libevent_my/server/caizi_list.h
+caizi_database.h
+/home/caizi/C++/libevent_my/server/caizi_database.h
 

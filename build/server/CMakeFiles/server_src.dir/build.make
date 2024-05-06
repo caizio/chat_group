@@ -83,9 +83,22 @@ server/CMakeFiles/server_src.dir/caizi_list.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server_src.dir/caizi_list.cpp.s"
 	cd /home/caizi/C++/libevent_my/build/server && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/caizi/C++/libevent_my/server/caizi_list.cpp -o CMakeFiles/server_src.dir/caizi_list.cpp.s
 
+server/CMakeFiles/server_src.dir/caizi_server.cpp.o: server/CMakeFiles/server_src.dir/flags.make
+server/CMakeFiles/server_src.dir/caizi_server.cpp.o: ../server/caizi_server.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/caizi/C++/libevent_my/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object server/CMakeFiles/server_src.dir/caizi_server.cpp.o"
+	cd /home/caizi/C++/libevent_my/build/server && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server_src.dir/caizi_server.cpp.o -c /home/caizi/C++/libevent_my/server/caizi_server.cpp
+
+server/CMakeFiles/server_src.dir/caizi_server.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/server_src.dir/caizi_server.cpp.i"
+	cd /home/caizi/C++/libevent_my/build/server && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/caizi/C++/libevent_my/server/caizi_server.cpp > CMakeFiles/server_src.dir/caizi_server.cpp.i
+
+server/CMakeFiles/server_src.dir/caizi_server.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server_src.dir/caizi_server.cpp.s"
+	cd /home/caizi/C++/libevent_my/build/server && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/caizi/C++/libevent_my/server/caizi_server.cpp -o CMakeFiles/server_src.dir/caizi_server.cpp.s
+
 server/CMakeFiles/server_src.dir/caizi_thread.cpp.o: server/CMakeFiles/server_src.dir/flags.make
 server/CMakeFiles/server_src.dir/caizi_thread.cpp.o: ../server/caizi_thread.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/caizi/C++/libevent_my/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object server/CMakeFiles/server_src.dir/caizi_thread.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/caizi/C++/libevent_my/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object server/CMakeFiles/server_src.dir/caizi_thread.cpp.o"
 	cd /home/caizi/C++/libevent_my/build/server && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server_src.dir/caizi_thread.cpp.o -c /home/caizi/C++/libevent_my/server/caizi_thread.cpp
 
 server/CMakeFiles/server_src.dir/caizi_thread.cpp.i: cmake_force
@@ -96,33 +109,20 @@ server/CMakeFiles/server_src.dir/caizi_thread.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server_src.dir/caizi_thread.cpp.s"
 	cd /home/caizi/C++/libevent_my/build/server && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/caizi/C++/libevent_my/server/caizi_thread.cpp -o CMakeFiles/server_src.dir/caizi_thread.cpp.s
 
-server/CMakeFiles/server_src.dir/server.cpp.o: server/CMakeFiles/server_src.dir/flags.make
-server/CMakeFiles/server_src.dir/server.cpp.o: ../server/server.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/caizi/C++/libevent_my/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object server/CMakeFiles/server_src.dir/server.cpp.o"
-	cd /home/caizi/C++/libevent_my/build/server && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server_src.dir/server.cpp.o -c /home/caizi/C++/libevent_my/server/server.cpp
-
-server/CMakeFiles/server_src.dir/server.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/server_src.dir/server.cpp.i"
-	cd /home/caizi/C++/libevent_my/build/server && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/caizi/C++/libevent_my/server/server.cpp > CMakeFiles/server_src.dir/server.cpp.i
-
-server/CMakeFiles/server_src.dir/server.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server_src.dir/server.cpp.s"
-	cd /home/caizi/C++/libevent_my/build/server && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/caizi/C++/libevent_my/server/server.cpp -o CMakeFiles/server_src.dir/server.cpp.s
-
 # Object files for target server_src
 server_src_OBJECTS = \
 "CMakeFiles/server_src.dir/caizi_database.cpp.o" \
 "CMakeFiles/server_src.dir/caizi_list.cpp.o" \
-"CMakeFiles/server_src.dir/caizi_thread.cpp.o" \
-"CMakeFiles/server_src.dir/server.cpp.o"
+"CMakeFiles/server_src.dir/caizi_server.cpp.o" \
+"CMakeFiles/server_src.dir/caizi_thread.cpp.o"
 
 # External object files for target server_src
 server_src_EXTERNAL_OBJECTS =
 
 ../lib/libserver_src.a: server/CMakeFiles/server_src.dir/caizi_database.cpp.o
 ../lib/libserver_src.a: server/CMakeFiles/server_src.dir/caizi_list.cpp.o
+../lib/libserver_src.a: server/CMakeFiles/server_src.dir/caizi_server.cpp.o
 ../lib/libserver_src.a: server/CMakeFiles/server_src.dir/caizi_thread.cpp.o
-../lib/libserver_src.a: server/CMakeFiles/server_src.dir/server.cpp.o
 ../lib/libserver_src.a: server/CMakeFiles/server_src.dir/build.make
 ../lib/libserver_src.a: server/CMakeFiles/server_src.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/caizi/C++/libevent_my/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library ../../lib/libserver_src.a"

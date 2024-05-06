@@ -1,6 +1,6 @@
 /home/caizi/C++/libevent_my/build/CMakeFiles/rebuild_cache.dir
 /home/caizi/C++/libevent_my/build/CMakeFiles/edit_cache.dir
-/home/caizi/C++/libevent_my/build/CMakeFiles/server.exe.dir
+/home/caizi/C++/libevent_my/build/CMakeFiles/server.dir
 /home/caizi/C++/libevent_my/build/server/CMakeFiles/rebuild_cache.dir
 /home/caizi/C++/libevent_my/build/server/CMakeFiles/edit_cache.dir
 /home/caizi/C++/libevent_my/build/server/CMakeFiles/server_src.dir

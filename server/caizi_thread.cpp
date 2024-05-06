@@ -20,6 +20,18 @@ void Thread::start(Info *info, DataBase *db){
 void Thread::run(){
     struct event timeout;
     struct timeval tv;
+
+    event_assign(&timeout, m_base, -1, EV_PERSIST, timeout_cb, this);
+
+    // 计时器重置并设置为3
+	evutil_timerclear(&tv);
+	tv.tv_sec = 3;
+	event_add(&timeout, &tv);
+
+	std::cout << "thread：" << m_id << " start working ..." << std::endl;
+
+	event_base_dispatch(m_base);
+	event_base_free(m_base);
 }
 std::thread::id Thread::get_id(){
     return m_id;
@@ -141,23 +153,23 @@ void Thread::user_login(Bevent* buf_evnt, Json::Value& data){
     int start = 0;
     while(index != -1){
         std::string name = friendlist.substr(start, index - start);
-        Bevent* bv = m_info->user_is_in_m_users(name);
-        if(NULL != bv){
+        Bevent* bv_f = m_info->user_is_in_m_users(name);
+        if(NULL != bv_f){
             Json::Value val;
             val["cmd"] = "online";
             val["username"] = data["username"];
-            write_Data(bv, &val);
+            write_Data(bv_f, &val);
         }
         start = index + 1;
         index = friendlist.find('|', start);
     }
     // 处理最后一个朋友
 	std::string name = friendlist.substr(start, index - start);
-	Bevent* bv = m_info->user_is_in_m_users(name);
-	if(NULL != bv){
+	Bevent* bv_f = m_info->user_is_in_m_users(name);
+	if(NULL != bv_f){
 		val["cmd"] = "online";
 		val["username"] = data["username"];
-		write_Data(bv, &val);
+		write_Data(bv_f, &val);
 	}
 }
 
@@ -399,14 +411,62 @@ void Thread::get_group_member(Bevent* buf_event, Json::Value& data){
 void Thread::worker(Thread* t){
     t->run();
 }
+
+// 计时器的回调函数，将arg转成所需要类
 void Thread::timeout_cb(evutil_socket_t fd, short event, void *arg){
+    Thread *t = (Thread *)arg;
+}
+
+// 读取回调函数的数据，并执行相应的操作
+void Thread::thread_readcb(Bevent* buf_event, void *args){
+    Thread *t = (Thread*) args;
+
+    char buf[1024] = {0};
+    if(!t->read_data(buf_event, buf)){
+        std::cout << "read data error" << std::endl;
+        return;
+    }
+
+    // std::cout << "thread_id:" << t->get_id() << "receive data:" << buf << std::endl;
+    Json::Reader reader;
+    Json::Value data;
+    if(!reader.parse(buf, data)){
+        std::cout << "parse data error" << std::endl;
+        return;
+    }
+
+    if (data["cmd"] == "register"){
+		t->user_register(buf_event, data);
+	}else if (data["cmd"] == "login"){
+		t->user_login(buf_event, data);
+    }else if (data["cmd"] == "addfriend"){
+		t->user_addfriend(buf_event, data);
+	}else if (data["cmd"] == "private"){
+		t->private_chat(buf_event, data);
+	}else if (data["cmd"] == "creategroup"){
+		t->create_group(buf_event, data);
+	}else if (data["cmd"] == "joingroup"){
+		t->join_group(buf_event, data);
+	}else if (data["cmd"] == "groupchat"){
+		t->group_chat(buf_event, data);
+	}else if (data["cmd"] == "file"){
+		t->transfer_file(buf_event, data);
+	}else if (data["cmd"] == "offline"){
+		t->client_offline(buf_event, data);
+	}else if (data["cmd"] == "groupmember"){
+		t->get_group_member(buf_event, data);
+	}
 
 }
-void Thread::thread_readcb(Bevent* buf_event, void *){
 
-}
-void Thread::thread_eventcb(Bevent* buf_event, short , void *){
-
+// 检测事件是否结束，并释放Bevent
+void Thread::thread_eventcb(Bevent* buf_event, short flag, void* arg){
+    if(flag & BEV_EVENT_EOF){
+        std::cout << "client close" << std::endl;
+        free(buf_event);
+    }{
+        std::cout << "client error" << std::endl;
+    }
 }
 
 }

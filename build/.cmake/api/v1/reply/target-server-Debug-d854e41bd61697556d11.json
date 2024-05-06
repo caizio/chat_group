@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "/home/caizi/C++/libevent_my/bin/server.exe"
+			"path" : "/home/caizi/C++/libevent_my/bin/server"
 		}
 	],
 	"backtrace" : 1,
@@ -11,7 +11,8 @@
 		"commands" : 
 		[
 			"add_executable",
-			"INCLUDE_DIRECTORIES"
+			"target_link_libraries",
+			"include_directories"
 		],
 		"files" : 
 		[
@@ -30,6 +31,12 @@
 			},
 			{
 				"command" : 1,
+				"file" : 0,
+				"line" : 19,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
 				"file" : 0,
 				"line" : 9,
 				"parent" : 0
@@ -51,11 +58,11 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 2,
+					"backtrace" : 3,
 					"path" : "/home/caizi/C++/libevent_my/server"
 				},
 				{
-					"backtrace" : 2,
+					"backtrace" : 3,
 					"path" : "/home/caizi/C++/libevent_my/client"
 				}
 			],
@@ -66,7 +73,14 @@
 			]
 		}
 	],
-	"id" : "server.exe::@6890427a1f51a3e7e1df",
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "server_src::@d19778d2e34a1e3ddfc0"
+		}
+	],
+	"id" : "server::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -78,12 +92,33 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "../lib/libserver_src.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-ljsoncpp",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lmysqlclient",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lpthread",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-levent",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
-	"name" : "server.exe",
-	"nameOnDisk" : "server.exe",
+	"name" : "server",
+	"nameOnDisk" : "server",
 	"paths" : 
 	{
 		"build" : ".",
